@@ -1,4 +1,4 @@
- :cuncurrency: 5
- :queues:
-  - [mailer, 5]
-  - [default, 5]
+:cuncurrency: 9
+:queues:
+  - mailer
+  - default
