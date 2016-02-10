@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
          :rememberable,
          :trackable,
          :validatable,
-         :confirmable
+         :confirmable,
+         :async
 
   validate :email_is_unique, on: :create
   after_create :create_account
