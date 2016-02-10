@@ -36,6 +36,9 @@ gem 'awesome_print'
 # Background work per asincrono
 gem 'sidekiq'
 
+# Stripe gem
+gem 'stripe'
+
 gem 'rails_12factor'
 
 group :development, :test do

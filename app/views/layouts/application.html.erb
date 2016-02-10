@@ -12,10 +12,26 @@
 <%= link_to('Log Out', destroy_user_session_path, method: :delete) %>
 <%= link_to('Sign Up', new_user_registration_path) %>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% flash.each do |type, message| %>
+    <%= content_tag :div, message, class: "toast #{type}", id: 'advice' %>
+<% end %>
 
 <%= yield %>
+
+
+<script>
+
+  var ready = function () {
+
+    setTimeout(function () {
+      $('#advice').fadeOut('fast');
+    }, 5000);
+  };
+
+  $(document).ready(ready);
+  $(document).on('page:load', ready);
+</script>
+
 
 </body>
 </html>
