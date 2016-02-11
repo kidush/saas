@@ -36,8 +36,9 @@ gem 'awesome_print'
 # Background work per asincrono
 gem 'sidekiq'
 
-# Stripe gem
+# Stripe per i pagamenti & Stripe event per processare gli eventi stripe
 gem 'stripe'
+gem 'stripe_event'
 
 gem 'rails_12factor'
 
