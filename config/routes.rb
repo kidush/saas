@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: {
-      registrations: 'registrations',
-      sessions: 'sessions'
-  }
+  devise_for :users, controllers: {registrations: 'registrations', sessions: 'sessions'}
 
   get '/subscriptions/cancel_subscription' => 'subscriptions#cancel_subscription'
   get '/subscriptions/update_card' => 'subscriptions#update_card'

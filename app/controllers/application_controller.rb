@@ -17,6 +17,7 @@ before_filter :set_mailer_host
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :subdomain
+    devise_parameter_sanitizer.for(:invite) << :subdomain
   end
 
 end

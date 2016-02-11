@@ -8,7 +8,7 @@
   <%= f.text_field field %></p>
 <% end -%>
 
-    <%= f.text_field :subdomain, input_html: {:value => (current_user ? current_user.subdomain : '')} %>
+    <%= f.text_field :subdomain, :value => (current_user ? current_user.subdomain : ''), :readonly => true %>
 
   <p><%= f.submit t("devise.invitations.new.submit_button") %></p>
 <% end %>

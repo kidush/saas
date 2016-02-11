@@ -1,7 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
   def new
-    if request.subdomain.present? || request.subdomain == 'www'
+    if request.subdomain.blank? || request.subdomain == 'www'
       super
     else
       flash[:notice] = "Accesso negato"
