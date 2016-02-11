@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root :to => 'home#index'
+
   devise_for :users, controllers: {registrations: 'registrations', sessions: 'sessions'}
 
   get '/subscriptions/cancel_subscription' => 'subscriptions#cancel_subscription'
@@ -7,8 +9,6 @@ Rails.application.routes.draw do
   post '/subscriptions/update_card_details' => 'subscriptions#update_card_details'
 
   resources :subscriptions
-
-  root 'home#index'
 
   mount StripeEvent::Engine, at: '/stripe-event'
   # The priority is based upon order of creation: first created -> highest priority.
