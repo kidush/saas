@@ -12,11 +12,18 @@
 
 </head>
 <body>
+<% if current_user.nil? %>
+    <% if request.subdomain.blank? || request.subdomain == 'www' %>
+        <%= link_to('Sign Up', new_user_registration_path) %>
 
-<%= link_to('Log In', new_user_session_path) %>
-<%= link_to('Log Out', destroy_user_session_path, method: :delete) %>
-<%= link_to('Sign Up', new_user_registration_path) %>
-<%= link_to('Abbonamento', subscriptions_path) %>
+    <% else %>
+        <%= link_to('Log In', new_user_session_path) %>
+    <% end %>
+<% else %>
+    <h4>Benvenuto <%= current_user.email %></h4>
+    <%= link_to('Log Out', destroy_user_session_path, method: :delete) %>
+    <%= link_to('Abbonamento', subscriptions_path) %>
+<% end %>
 
 <% flash.each do |type, message| %>
     <%= content_tag :div, message, class: "toast #{type}", id: 'advice' %>

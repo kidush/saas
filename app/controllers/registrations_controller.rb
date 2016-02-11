@@ -1,0 +1,21 @@
+class RegistrationsController < Devise::RegistrationsController
+
+  def new
+    if request.subdomain.present? || request.subdomain == 'www'
+      super
+    else
+      flash[:notice] = "Accesso negato"
+      redirect_to :root
+    end
+  end
+
+  protected
+  def after_sign_up_path_for(resource)
+    new_user_session_url(subdomain: resource.subdomain)
+  end
+
+  def after_inactive_sign_up_path_for(resource)
+    new_user_session_url(subdomain: resource.subdomain)
+  end
+
+end
