@@ -27,9 +27,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Server gem
 gem 'puma'
 
-# Autenticazione e asincrono per mail e background work
+# Autenticazione e asincrono per mail e background work e per per invitare nuovi utenti
 gem 'devise'
 gem 'devise-async'
+gem 'devise_invitable'
 
 # Migliore indentazione per ruby console
 gem 'awesome_print'
@@ -44,6 +45,9 @@ gem 'stripe_event'
 # Multi-tenant gem & supporto per async con Sidekiq
 gem 'apartment'
 gem 'apartment-sidekiq'
+
+# serve per aprire le mail direttamente nel browser per debug
+gem 'letter_opener'
 
 gem 'rails_12factor'
 
