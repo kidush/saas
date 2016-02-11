@@ -40,6 +40,9 @@ gem 'sidekiq'
 gem 'stripe'
 gem 'stripe_event'
 
+# Multi-tenant gem
+gem 'apartment'
+
 gem 'rails_12factor'
 
 group :development, :test do
