@@ -1,0 +1,14 @@
+<% if @account.stripe_plan_id %>
+    <% if @account.active_until > Time.now %>
+        <p>Il tuo abbonamento è attivo sino al <%= @account.active_until %></p>
+    <% else %>
+        <p>Il tuo abbonamento è scaduto il <%= @account.active_until %></p>
+    <% end %>
+<% else %>
+    <p>Non hai un account attivo</p>
+<% end %>
+
+
+<%= link_to('Modifica abbonamento', edit_subscription_path(@account.id), :class => 'btn btn-large orange') %>
+<%= link_to('Elimina abbonamento', subscriptions_cancel_subscription_path, :class => 'btn btn-large red') %>
+<%= link_to('Aggiorna carta di credito', subscriptions_update_card_path, :class => 'btn btn-large blue') %>

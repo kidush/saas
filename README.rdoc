@@ -1,28 +1,7 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##  Popolare il db con i piani pagamento di stripe, esegui la procedura per tutti i piani che hai creato in Striperails
 
-Things you may want to cover:
+p1 = Stripe::Plan.retrive("nome_del_piano")
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Plan.create(:stripe_id => p1.id, :name => p1.name, :price => p1.amount, :interval => p1.interval)

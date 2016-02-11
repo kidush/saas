@@ -5,12 +5,18 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 </head>
 <body>
 
 <%= link_to('Log In', new_user_session_path) %>
 <%= link_to('Log Out', destroy_user_session_path, method: :delete) %>
 <%= link_to('Sign Up', new_user_registration_path) %>
+<%= link_to('Abbonamento', subscriptions_path) %>
 
 <% flash.each do |type, message| %>
     <%= content_tag :div, message, class: "toast #{type}", id: 'advice' %>
@@ -26,6 +32,8 @@
     setTimeout(function () {
       $('#advice').fadeOut('fast');
     }, 5000);
+
+    $('select').material_select();
   };
 
   $(document).ready(ready);
