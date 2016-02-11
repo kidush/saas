@@ -12,9 +12,9 @@ test:
 
 production:
   <<: *default
-  host: ec2-79-125-117-94.eu-west-1.compute.amazonaws.com
-  database: dd07fop0sj8bvl
-  username: zcqfnjdxtppiyh
+  host: ec2-54-217-202-108.eu-west-1.compute.amazonaws.com
+  database: d4bpdpijckm715
+  username: tzlmjcjlxbzqmk
   port: 5432
-  password: Lt4rQzbrWzR1Xd4bv33hdGEvX4
+  password: 3Gqt77wR1xYRXvAoEb3Na3-KCd
 
