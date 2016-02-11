@@ -1,4 +1,6 @@
-:cuncurrency: 9
+:verbose: true
+:concurrency: 1
 :queues:
-  - mailer
-  - default
+ - [mailer, 1]
+ - [default, 1]
+:logfile: ./log/sidekiq.log
