@@ -1,16 +1,173 @@
-.succes {
-  background: rgba(57,210,105,0.5) !important;
-  color: rgb(57,210,105) !important
+td, th {
+  border-radius: 0 !important;
 }
+
+.divider {
+  margin: 20px 0 !important;
+}
+
+.right-abs {
+  right: 0 !important;
+}
+
+.left-abs {
+  left: 0 !important;
+}
+
+#access-pannel {
+  margin-top: 10%;
+}
+
+.important {
+  font-size: 6rem !important;
+}
+
+//  Text trasformation
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+//  Divider Custom
+
+.divider-right {
+  @extend .divider;
+  @extend .right-align;
+
+  width: 35%;
+}
+
+.divider-left {
+  @extend .divider;
+  @extend .left-align;
+
+  width: 35%;
+}
+
+.divider-center {
+  @extend .divider;
+  @extend .center-align;
+
+  width: 35%;
+}
+
+.divider-center-abs {
+  @extend .divider;
+  margin: 0 auto !important;
+  height: 3px !important;
+  background-color: $primary-color !important;
+  width: 20%;
+}
+
+//  DiD/M & DiDC/MC = custom views
+
+.split {
+  height: 100%;
+  background: linear-gradient(90deg, color('orange', 'lighten-4') 50%, color('blue', 'lighten-4') 50%);
+}
+
+//  Chart
+
+.chart {
+  max-height: 200px
+}
+
+#day {
+  height: 400px;
+  width: auto;
+  margin: 0 auto;
+  min-height: 400px;
+
+  svg {
+    overflow: visible !important;
+  }
+}
+
+#channel_last,
+#channel,
+#room_last,
+#room {
+
+  svg {
+    top: -90px !important;
+  }
+}
+
+//  MARGIN
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.pagination a {
+  color: #0f0f0f;
+
+  li.active {
+    color: #fff;
+  }
+}
+
+header, main, footer {
+  padding-left: 240px !important;
+}
+
+@media only screen and (max-width: 992px) {
+  header, main, footer {
+    padding-left: 0 !important;
+  }
+}
+
+.logo-img {
+  width: 70%;
+  height: auto;
+  margin: 0 auto !important;
+}
+
+//  NO HOVERABLE CHANGE
+
+
+.no-hover {
+  &:hover {
+    background-color: transparent !important;
+  }
+}
+
+
+//  BORDER STYLED
+
+.border-bottom{
+  border-bottom: 3px solid;
+}
+.border-top{
+  border-top: 3px solid;
+}
+
+//  Welcome Style
+
+.welcome{
+  height: 20% !important;
+  padding: 15% 0 0 0 !important;
+}
+
+//  Message style
+
 .error{
-  background: rgba(209,0,38,0.5) !important;
-  color: rgb(209,0,38) !important
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1
 }
-.alert{
-  background: rgba(221,229,0,0.5) !important;
-  color: rgb(221,229,0) !important
+.success{
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6
 }
 .notice{
-  background: rgba(0,198,229,0.5) !important;
-  color: rgb(0,198,229) !important
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1
+}
+.alert{
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc
 }

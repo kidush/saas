@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/subscriptions/update_card_details' => 'subscriptions#update_card_details'
 
   resources :subscriptions
+  resources :admin_dashboard
 
   mount StripeEvent::Engine, at: '/stripe-event'
   # The priority is based upon order of creation: first created -> highest priority.

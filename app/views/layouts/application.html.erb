@@ -2,11 +2,12 @@
 <html>
 <head>
   <title>Saas</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
@@ -20,17 +21,69 @@
         <%= link_to('Log In', new_user_session_path) %>
     <% end %>
 <% else %>
-    <h4>Benvenuto <%= current_user.email %></h4>
-    <%= link_to('Log Out', destroy_user_session_path, method: :delete) %>
-    <%= link_to('Abbonamento', subscriptions_path) %>
-    <%= link_to('Invita Utente', new_user_invitation_path) %>
-<% end %>
 
-<% flash.each do |type, message| %>
-    <%= content_tag :div, message, class: "toast #{type}", id: 'advice' %>
+    <ul id="slide-out" class="side-nav fixed">
+      <li class="center-align welcome no-hover orange-text">
+        <h5>Benvenuto</h5>
+        <p><%= current_user.email %></p>
+      </li>
+      <% if can? :menage, :admin_dashboards %>
+          <li><%= link_to('<i class="material-icons left">&#xE871;</i>'.html_safe + 'DASHBOARD',  admin_dashboard_index_path, class: 'white-text bold waves-effect waves-teal') %></li>
+      <% else %>
+          <li><a href="#!" class="white-text bold waves-effect waves-teal"><i class="material-icons left">&#xE871;</i>DASHBOARD</a>
+      <% end %>
+      </li>
+      <% if current_user.has_role? :app_manager %>
+      <div class="divider"></div>
+      <li><%= link_to('<i class="material-icons left">&#xE7FE;</i>'.html_safe+'Invita Utente'.upcase, new_user_invitation_path, class: 'white-text bold waves-effect waves-teal') %></li>
+      <% end %>
+      <% if can? :menage, :subscriptions %>
+          <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+              <li>
+                <a class="collapsible-header white-text bold waves-effect waves-teal"><i class="material-icons left">&#xE926;</i><%= 'Abbonamento'.upcase %>
+                  <i class="material-icons right">&#xE5C5;</i></a>
+                <div class="collapsible-body">
+                  <ul>
+                    <li><%= link_to('<i class="material-icons left">&#xE854;</i>'.html_safe+'Nuovo abb.'.upcase, new_subscription_path, class: 'bold waves-effect waves-teal') %></li>
+                    <li><%= link_to('<i class="material-icons left">&#xE627;</i>'.html_safe+'Aggiorna abb.'.upcase, edit_subscription_path(Account.select(:id).find_by_email(current_user.email)), class: 'bold waves-effect waves-teal') %></li>
+                    <li><%= link_to('<i class="material-icons left">&#xE92B;</i>'.html_safe+'Elimina abb.'.upcase, subscriptions_cancel_subscription_path, class: 'bold waves-effect waves-teal') %></li>
+                    <li><%= link_to('<i class="material-icons left">&#xE870;</i>'.html_safe+'Aggiorna carta'.upcase, subscriptions_update_card_path, class: 'bold waves-effect waves-teal') %></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </li>
+      <% end %>
+      <div class="divider"></div>
+      <li><%= link_to('<i class="material-icons left">&#xE8AC;</i>'.html_safe+'Log Out'.upcase, destroy_user_session_path, method: :delete, class: 'white-text bold waves-effect waves-teal') %></li>
+    </ul>
+    <ul class="left hide-on-med-and-down no-margin">
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+      <li>
+        <a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="mdi-navigation-arrow-drop-down right"></i></a>
+      </li>
+      <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">First</a></li>
+        <li><a href="#!">Second</a></li>
+        <li><a href="#!">Third</a></li>
+        <li><a href="#!">Fourth</a></li>
+      </ul>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse hide-on-med-and-up"><i class="material-icons medium menu">menu</i></a>
 <% end %>
+<header>
 
-<%= yield %>
+  <% flash.each do |type, message| %>
+      <%= content_tag :div, message, class: "toast #{type}", id: 'advice' %>
+  <% end %>
+
+</header>
+
+<main>
+  <%= yield %>
+</main>
 
 
 <script>
@@ -39,9 +92,14 @@
 
     setTimeout(function () {
       $('#advice').fadeOut('fast');
-    }, 5000);
+    }, 10000);
 
     $('select').material_select();
+
+    $(".button-collapse").sideNav();
+
+    $('.collapsible').collapsible();
+
   };
 
   $(document).ready(ready);

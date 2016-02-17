@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :authorize_user
 
   def new
     @plans = Plan.all
@@ -32,7 +33,7 @@ class SubscriptionsController < ApplicationController
           :plan => plan,
           :email => email
       )
-      subscriptions  = @customer.subscriptions
+      subscriptions = @customer.subscriptions
       @subscribed_plan = subscriptions.data.find { |o| o.plan.id == plan }
     else
       # Estraggo customer da Stripe
@@ -89,7 +90,7 @@ class SubscriptionsController < ApplicationController
 
     subscriptions = customer.subscriptions
 
-    current_subscribed_plan = subscriptions.data.find{ |o| o.plan.id == current_plan }
+    current_subscribed_plan = subscriptions.data.find { |o| o.plan.id == current_plan }
 
     if current_subscribed_plan.blank?
       raise "Abbonamento non trovato"
@@ -128,6 +129,10 @@ class SubscriptionsController < ApplicationController
       subscription = current_subscription.save
     end
     return subscription
+  end
+
+  def authorize_user
+    authorize! :menage, :subscriptions
   end
 
 

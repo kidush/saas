@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  rolify
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable,
@@ -13,8 +15,8 @@ class User < ActiveRecord::Base
   validate :email_is_unique, on: :create
   validate :subdomain_is_unique, on: :create
   after_validation :create_tenant
-
   after_create :create_account
+  after_create :add_role_to_user
 
   private
 
@@ -48,11 +50,20 @@ class User < ActiveRecord::Base
 
   def create_tenant
     return false unless self.errors.empty?
-    # controllo se il tenant è gia presente nel caso di aggiornamento password
+    # controllo se il tenant è gia presente nel caso di aggiornamento password.
     if self.new_record?
       Apartment::Tenant.create(subdomain)
     end
     Apartment::Tenant.switch!(subdomain)
+  end
+
+  # aggiunge di default il ruolo dell'utente in base a se è stato invitato o no.
+  def add_role_to_user
+    if created_by_invite?
+      add_role :app_user
+    else
+      add_role :app_manager
+    end
   end
 
 end

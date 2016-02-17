@@ -1,14 +1,32 @@
-<% if @account.stripe_plan_id %>
-    <% if @account.active_until > Time.now %>
-        <p>Il tuo abbonamento è attivo sino al <%= @account.active_until %></p>
+<div class="container">
+  <div class="row">
+    <div class="col s10 push-s1 red lighten-5 z-depth-1">
+      <h3 class="left uppercase">Elimina Abbonamento</h3>
+      <p class="right grey-text text-darken-1">
+        <em>
+          ATTENZIONE<br>
+          l'azione di cancellazione<br>
+          dell'abbonamento è irreversibile
+        </em>
+      </p>
+    </div>
+  </div>
+
+  <div class="row col s12 center-align section">
+    <% if @account.stripe_plan_id %>
+        <% if @account.active_until > Time.now %>
+            <p>Il tuo abbonamento è attivo sino al <%= @account.active_until %></p>
+        <% else %>
+            <p>Il tuo abbonamento è scaduto il <%= @account.active_until %></p>
+        <% end %>
     <% else %>
-        <p>Il tuo abbonamento è scaduto il <%= @account.active_until %></p>
+        <p>Non hai un account attivo</p>
     <% end %>
-<% else %>
-    <p>Non hai un account attivo</p>
-<% end %>
+  </div>
 
-
-<%= link_to('Modifica abbonamento', edit_subscription_path(@account.id), :class => 'btn btn-large orange') %>
-<%= link_to('Elimina abbonamento', subscriptions_cancel_subscription_path, :class => 'btn btn-large red') %>
-<%= link_to('Aggiorna carta di credito', subscriptions_update_card_path, :class => 'btn btn-large blue') %>
+  <div class="row">
+    <div class="col s12 center-align">
+      <%= link_to('Elimina abbonamento', subscriptions_cancel_subscription_path, :class => 'btn btn-large red') %>
+    </div>
+  </div>
+</div>

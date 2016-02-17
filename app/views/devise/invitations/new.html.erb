@@ -1,14 +1,72 @@
-<h2><%= t "devise.invitations.new.header" %></h2>
+<div class="container">
+  <div class="row">
+    <div class="col s10 push-s1 teal lighten-5 z-depth-1">
+      <h2 class="left uppercase">Spedisci Invito</h2>
+      <p class="right grey-text text-darken-1">
+        <em>
+          Utilizza il seguente account per<br>
+          invitare un collaboratore nel tuo<br>
+          spazio personale e contribuire al<br>
+          mantenimento del tuo spazio
+        </em>
+      </p>
+    </div>
+  </div>
 
-<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
-  <%= devise_error_messages! %>
-
-<% resource.class.invite_key_fields.each do |field| -%>
-  <p><%= f.label field %><br />
-  <%= f.text_field field %></p>
-<% end -%>
-
-    <%= f.text_field :subdomain, :value => (current_user ? current_user.subdomain : ''), :readonly => true %>
-
-  <p><%= f.submit t("devise.invitations.new.submit_button") %></p>
-<% end %>
+  <div class="row">
+    <div class="col s12 m5 l5 push-m1 push-l1">
+      <div class="card z-depth-2">
+        <div class="card-image">
+          <%= image_tag('hands.png', class: 'responsive-img') %>
+          <span class="card-title orange-text">Invita Utente</span>
+        </div>
+        <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
+            <div class="card-content">
+              <div class="row">
+                <div class="col s12">
+                  <p class="center-align bold">Sottodominio</p>
+                  <h3 class="center-align blue-text bold"><%= current_user ? current_user.subdomain.upcase : '' %></h3>
+                  <%= f.hidden_field :subdomain, :value => (current_user ? current_user.subdomain : '') %>
+                </div>
+              </div>
+              <div class="row">
+                <div class=" input-field col s12 m8 push-m2 l6 push-l3">
+                  <% resource.class.invite_key_fields.each do |field| %>
+                      <%= f.text_field field %>
+                      <%= f.label field %>
+                  <% end -%>
+                </div>
+              </div>
+            </div>
+            <div class="card-action">
+              <div class="row">
+                <div class="col s12 center-align">
+                  <%= f.submit 'Spedisci invito', class: 'btn btn-large green' %>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col s12 m5 l5 push-m1 push-l1">
+      <table>
+        <thead>
+        <tr>
+          <th data-field="id">EMAIL</th>
+          <th data-field="name">CREAZIONE ACCOUNT</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% element = get_info %>
+        <% element.each do |e| %>
+            <tr>
+              <td><%= e.email %></td>
+              <td><%= e.invitation_accepted_at %></td>
+              <%= link_to 'Delete User', cancel_user_registration_path(e), method: :delete, class: 'btn btn-large red' %>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

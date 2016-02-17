@@ -4,12 +4,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
-before_filter :set_mailer_host
+  before_filter :set_mailer_host
 
-  helper ApplicationHelper
+  # helper ApplicationHelper
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
 
   protected
+
+  def authenticate_inviter!
+     unless current_user.has_role? :app_manager
+       redirect_to root_url,  :alert => "Accesso non consentito"
+     end
+  end
 
   def set_mailer_host
     ActionMailer::Base.default_url_options[:host] = request.host_with_port

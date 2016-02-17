@@ -48,6 +48,7 @@ GEM
     bcrypt (3.1.10)
     builder (3.2.2)
     byebug (8.2.2)
+    cancancan (1.13.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -146,6 +147,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rolify (5.0.0)
     sass (3.4.21)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -189,6 +191,9 @@ GEM
     unf_ext (0.0.7.2)
     warden (1.2.6)
       rack (>= 1.0)
+    will_paginate (3.0.7)
+    will_paginate-materialize (0.1.2)
+      will_paginate (~> 3.0.6)
 
 PLATFORMS
   ruby
@@ -198,6 +203,7 @@ DEPENDENCIES
   apartment-sidekiq
   awesome_print
   byebug
+  cancancan
   coffee-rails (~> 4.1.0)
   devise
   devise-async
@@ -209,6 +215,7 @@ DEPENDENCIES
   puma
   rails (= 4.2.5)
   rails_12factor
+  rolify
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sidekiq
@@ -217,6 +224,8 @@ DEPENDENCIES
   stripe_event
   turbolinks
   uglifier (>= 1.3.0)
+  will_paginate (~> 3.0.6)
+  will_paginate-materialize
 
 BUNDLED WITH
    1.11.2

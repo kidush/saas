@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col s12 m3 l3">
+    <div class="card-panel blue lighten-5 z-depth-1 border-top blue-text text-darken-2">
+      <div class="black-text">
+        <h3 class="center-align"><%= @admin.count(:id) %></h3>
+        <h5 class="center-align uppercase">utenti attivi</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m3 l3">
+    <div class="card-panel orange lighten-5 z-depth-1 border-top orange-text text-darken-2">
+      <div class="black-text">
+        <h3 class="center-align"><%= @admin.distinct.count(:subdomain) %></h3>
+        <h5 class="center-align uppercase">sottodomini unici</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m3 l3">
+    <div class="card-panel red lighten-5 z-depth-1 border-top red-text text-darken-2">
+      <div class="black-text">
+        <h6 class="center-align">funzione</h6>
+        <h5 class="center-align uppercase">revenue mensile</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m3 l3">
+    <div class="card-panel teal lighten-5 z-depth-1">
+      <h3 class="center-align"></h3>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 m4 offset-m4 l4 offset-l4 center">
+    <%= will_paginate @admin, renderer: MaterializePagination::Rails %>
+  </div>
+</div>
+<div class="row section">
+  <div class="col s12 m6 l6">
+    <div class="card-panel blue lighten-5 z-depth-1 border-top blue-text text-darken-2">
+      <div class="black-text">
+        <h5 class="uppercase">Lista utenti attivi</h5>
+        <div class="divider"></div>
+        <table class="highlight responsive-table">
+          <thead>
+          <tr>
+            <th data-field="id">ID</th>
+            <th data-field="email">Email</th>
+            <th data-field="sottodominio">Sottodominio</th>
+            <th data-field="stripe_plan">Abbonamento</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @admin.each do |a| %>
+              <tr>
+                <td><%= a.id %></td>
+                <td><%= a.email %></td>
+                <td><%= a.subdomain %></td>
+                <td><%= a.stripe_plan_id %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

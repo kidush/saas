@@ -1,3 +1,25 @@
-<%= render :partial => 'plans' %>
+<div class="container">
+  <div class="row">
+    <div class="col s10 push-s1 teal lighten-5 z-depth-1">
+      <h3 class="left uppercase">nuovo<br>abbonamento</h3>
+      <p class="right grey-text text-darken-1">
+        <em>
+          Registra un nuovo abbonamento.<br>
+          nel caso tu non ne abbia già uno puoi utilizzare<br>
+          la sezione AGGIORNA ABB.<br>
+          nello stesso menu dove hai<br>
+          trovato questa sezione
+        </em>
+      </p>
+    </div>
+  </div>
+  <div class="row section">
+    <div class="col s12 m4 l4 push-m1 push-l1">
+      <%= render :partial => 'creditcard' %>
+    </div>
 
-<%= render :partial => 'creditcard' %>
+    <div class="col s12 m6 offset-m1 l6 offset-l1">
+      <%= render :partial => 'plans' %>
+    </div>
+  </div>
+</div>
